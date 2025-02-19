@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 /// Widget for displaying a preview of images
 class ImagePreviews extends StatelessWidget {
@@ -13,12 +13,13 @@ class ImagePreviews extends StatelessWidget {
 
   /// Creates a widget for preview of images. [imagePaths] can not be empty
   /// and all contained paths need to be non empty.
-  const ImagePreviews(this.imagePaths, {super.key, this.onDelete});
+  const ImagePreviews(this.imagePaths, {Key? key, this.onDelete})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     if (imagePaths.isEmpty) {
-      return const SizedBox.shrink();
+      return Container();
     }
 
     final imageWidgets = <Widget>[];
@@ -40,7 +41,8 @@ class _ImagePreview extends StatelessWidget {
   final String imagePath;
   final VoidCallback? onDelete;
 
-  const _ImagePreview(this.imagePath, {this.onDelete});
+  const _ImagePreview(this.imagePath, {Key? key, this.onDelete})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -50,11 +52,11 @@ class _ImagePreview extends StatelessWidget {
       child: Stack(
         children: <Widget>[
           ConstrainedBox(
-            constraints: const BoxConstraints(
+            constraints: BoxConstraints(
               maxWidth: 200,
               maxHeight: 200,
             ),
-            child: kIsWeb ? Image.network(imagePath) : Image.file(imageFile),
+            child: Image.file(imageFile),
           ),
           Positioned(
             right: 0,
@@ -63,7 +65,7 @@ class _ImagePreview extends StatelessWidget {
               child: FloatingActionButton(
                   backgroundColor: Colors.red,
                   onPressed: onDelete,
-                  child: const Icon(Icons.delete)),
+                  child: Icon(Icons.delete)),
             ),
           ),
         ],

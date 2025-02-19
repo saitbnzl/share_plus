@@ -13,11 +13,9 @@ https://github.com/flutter/flutter/issues/46618
   s.license          = { :file => '../LICENSE' }
   s.author           = { 'Flutter Community' => 'authors@fluttercommunity.dev' }
   s.source           = { :path => '.' }
-  s.source_files = 'share_plus/Sources/share_plus/**/*.swift'
-  s.public_header_files = 'share_plus/Sources/share_plus/**/*.h'
-  s.dependency 'FlutterMacOS'
+  s.source_files = 'Classes/**/*'
+  s.public_header_files = 'Classes/**/*.h'
 
   s.platform = :osx
-  s.osx.deployment_target = '10.14'
-  s.resource_bundles = {'share_plus_privacy' => ['share_plus/Sources/share_plus/PrivacyInfo.xcprivacy']}
+  s.osx.deployment_target = '10.11'
 end
